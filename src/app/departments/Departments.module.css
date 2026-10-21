@@ -1,0 +1,240 @@
+.pageContainer {
+  width: 100%;
+  padding: 32px 20px 48px;
+}
+
+.inner {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 24px;
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #1e40af;
+  background-color: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.blueDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #2563eb;
+}
+
+.subtitle {
+  font-size: 14.5px;
+  color: #64748b;
+}
+
+.deptCardGroup {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.deptRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.15s ease;
+  gap: 20px;
+}
+
+.deptRow:last-child {
+  border-bottom: none;
+}
+
+.deptRow:hover {
+  background-color: #f8fafc;
+}
+
+.deptMain {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1;
+}
+
+.iconBox {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.deptDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.deptTitleRow {
+  display: flex;
+  align-items: center;
+}
+
+.deptName {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0f172a;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.deptName:hover {
+  color: #2563eb;
+}
+
+.deptDescription {
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.5;
+  margin-top: 2px;
+  max-width: 580px;
+}
+
+.metaRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12.5px;
+  color: #64748b;
+  margin-top: 8px;
+}
+
+.metaItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.metaItem svg {
+  color: #94a3b8;
+}
+
+.bullet {
+  color: #cbd5e1;
+}
+
+.tracksList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.trackChip {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #3b82f6;
+  background-color: #f0fdf4;
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.trackChip:hover {
+  background-color: #eff6ff;
+  border-color: #bfdbfe;
+  color: #1d4ed8;
+}
+
+.actionCol {
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+
+.viewStudentsLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+  transition: gap 0.2s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.arrowIcon {
+  transition: transform 0.2s ease;
+}
+
+.viewStudentsLink:hover {
+  color: #1d4ed8;
+}
+
+.viewStudentsLink:hover .arrowIcon {
+  transform: translateX(3px);
+}
+
+.subFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 4px 0;
+  font-size: 12px;
+  color: #64748b;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.curriculumYear {
+  font-weight: 500;
+}
+
+.apiStatus {
+  color: #64748b;
+}
+
+@media (max-width: 640px) {
+  .deptRow {
+    flex-direction: column;
+    padding: 20px;
+    gap: 14px;
+  }
+  .actionCol {
+    align-self: flex-start;
+  }
+}

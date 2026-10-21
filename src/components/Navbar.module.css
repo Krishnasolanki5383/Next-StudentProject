@@ -1,0 +1,132 @@
+.navbar {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #0f172a;
+}
+
+.logoIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  transition: transform 0.2s ease;
+}
+
+.brand:hover .logoIcon {
+  transform: scale(1.05);
+}
+
+.brandTitle {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #0f172a;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  height: 64px;
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s ease;
+  padding: 0 2px;
+}
+
+.navLink:hover {
+  color: #0f172a;
+}
+
+.navLink.active {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.activeBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2.5px;
+  background-color: #2563eb;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+}
+
+.practiceBadge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background-color: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+  letter-spacing: 0.01em;
+  user-select: none;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 16px;
+    height: 56px;
+  }
+  .left {
+    gap: 16px;
+  }
+  .brandTitle {
+    display: none;
+  }
+  .navLinks {
+    gap: 16px;
+    height: 56px;
+  }
+  .navLink {
+    font-size: 13.5px;
+  }
+  .practiceBadge {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
