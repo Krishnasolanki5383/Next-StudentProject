@@ -1,3 +1,7 @@
+/* ==========================================================================
+   Breadcrumbs Component Styles
+   ========================================================================== */
+
 .wrapper {
   margin-bottom: 24px;
 }
@@ -27,7 +31,6 @@
 .separator {
   color: #94a3b8;
   font-size: 12px;
-  user-select: none;
 }
 
 .link {
@@ -46,6 +49,7 @@
   font-weight: 600;
 }
 
+/* Actions Row (Back button) */
 .actionsRow {
   display: flex;
   align-items: center;
@@ -59,23 +63,15 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 500;
   color: #475569;
   text-decoration: none;
-  transition: color 0.15s ease, transform 0.15s ease;
+  transition: color 0.15s ease;
 }
 
 .backLink:hover {
   color: #2563eb;
-}
-
-.arrow {
-  transition: transform 0.15s ease;
-}
-
-.backLink:hover .arrow {
-  transform: translateX(-3px);
 }
 
 .rightAction {
@@ -86,7 +82,6 @@
   font-weight: 600;
   color: #2563eb;
   text-decoration: none;
-  transition: color 0.15s ease;
 }
 
 .rightAction:hover {

@@ -5,10 +5,16 @@ import { getStudentByIdOrSlug, getAllStudents } from "@/data/directoryData";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import styles from "./StudentProfile.module.css";
 
+// PageProps interface: In Next.js 15+, dynamic route params are a Promise
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
+/**
+ * generateStaticParams
+ * In Next.js, this tells the build tool which student pages to pre-render.
+ * Pre-rendered pages load instantly for users!
+ */
 export async function generateStaticParams() {
   const students = getAllStudents();
   return students.flatMap((student) => [
@@ -17,10 +23,19 @@ export async function generateStaticParams() {
   ]);
 }
 
+/**
+ * StudentProfilePage Component
+ * Dynamic Route: /students/[id]
+ * Displays detailed information about a single student.
+ */
 export default async function StudentProfilePage({ params }: PageProps) {
+  // 1. Extract the "id" parameter from URL (e.g. "aarav-mehta" or "STU-1042")
   const { id } = await params;
+
+  // 2. Look up the student in our data
   const student = getStudentByIdOrSlug(id);
 
+  // 3. If student is not found, automatically trigger Next.js 404 page
   if (!student) {
     notFound();
   }
@@ -28,7 +43,7 @@ export default async function StudentProfilePage({ params }: PageProps) {
   return (
     <div className={styles.pageContainer}>
       <div className={styles.inner}>
-        {/* Breadcrumbs and back navigation */}
+        {/* Breadcrumb Navigation with Back Button */}
         <Breadcrumbs
           items={[
             { label: "Students", href: "/" },
@@ -40,9 +55,9 @@ export default async function StudentProfilePage({ params }: PageProps) {
           }}
         />
 
-        {/* Profile Card */}
+        {/* Main Student Profile Card */}
         <div className={styles.profileCard}>
-          {/* Header Row */}
+          {/* Header Row: Avatar, Name, ID, and Status */}
           <div className={styles.cardHeader}>
             <div
               className={styles.avatarLarge}
@@ -68,7 +83,7 @@ export default async function StudentProfilePage({ params }: PageProps) {
 
           <div className={styles.divider} />
 
-          {/* 2-Column Metadata Grid */}
+          {/* 2-Column Info Grid */}
           <div className={styles.metaGrid}>
             <div className={styles.metaCol}>
               <div className={styles.metaField}>
@@ -77,16 +92,13 @@ export default async function StudentProfilePage({ params }: PageProps) {
                   href={`/departments/${student.departmentSlug}`}
                   className={styles.deptLink}
                 >
-                  {student.department}
+                  {student.department} &rarr;
                 </Link>
               </div>
 
               <div className={styles.metaField}>
-                <span className={styles.metaLabel}>EMAIL</span>
-                <a
-                  href={`mailto:${student.email}`}
-                  className={styles.emailLink}
-                >
+                <span className={styles.metaLabel}>EMAIL ADDRESS</span>
+                <a href={`mailto:${student.email}`} className={styles.emailLink}>
                   {student.email}
                 </a>
               </div>
@@ -115,48 +127,26 @@ export default async function StudentProfilePage({ params }: PageProps) {
 
           <div className={styles.divider} />
 
-          {/* Academic Details Section */}
+          {/* Enrolled Courses / Subjects Section */}
           <section className={styles.section}>
-            <h2 className={styles.sectionTitle}>Academic Details</h2>
-
-            <div className={styles.academicRow}>
-              <span className={styles.academicLabel}>Department</span>
-              <span className={styles.academicValue}>{student.department}</span>
-            </div>
-
-            <div className={styles.academicRow}>
-              <span className={styles.academicLabel}>
-                Current Academic Standing
-              </span>
-              <span className={styles.academicValue}>{student.standing}</span>
-            </div>
-
-            <div className={styles.subjectsContainer}>
-              <span className={styles.subjectsLabel}>ENROLLED SUBJECTS</span>
-              <div className={styles.subjectsList}>
-                {student.subjects.map((subject, idx) => (
-                  <div key={idx} className={styles.subjectItem}>
-                    <span className={styles.subjectName}>
-                      <strong>{subject.code}:</strong> {subject.name}
-                    </span>
-                    <span className={styles.subjectCredits}>
-                      {subject.credits}
-                    </span>
-                  </div>
-                ))}
-              </div>
+            <h2 className={styles.sectionTitle}>Enrolled Subjects</h2>
+            <div className={styles.subjectsList}>
+              {student.subjects.map((subject, idx) => (
+                <div key={idx} className={styles.subjectItem}>
+                  <span className={styles.subjectName}>
+                    <strong>{subject.code}:</strong> {subject.name}
+                  </span>
+                  <span className={styles.subjectCredits}>{subject.credits}</span>
+                </div>
+              ))}
             </div>
           </section>
         </div>
 
         {/* System Sub-Footer */}
         <div className={styles.subFooter}>
-          <span className={styles.systemId}>
-            System Record ID: {student.systemRecordId}
-          </span>
-          <span className={styles.validatedDate}>
-            Last validated: {student.lastValidated}
-          </span>
+          <span>Record ID: {student.systemRecordId}</span>
+          <span>Verified: {student.lastValidated}</span>
         </div>
       </div>
     </div>

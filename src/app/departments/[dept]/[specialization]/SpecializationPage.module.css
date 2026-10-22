@@ -1,217 +1,113 @@
+/* ==========================================================================
+   Specialization Page Styles
+   ========================================================================== */
+
 .pageContainer {
-  width: 100%;
-  padding: 32px 20px 48px;
+  min-height: calc(100vh - 64px - 50px);
+  padding: 32px 16px;
+  background-color: #f8fafc;
 }
 
 .inner {
-  max-width: 860px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
-.trackCard {
+/* Specialization Overview Card */
+.specCard {
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-  padding: 32px;
-  margin-bottom: 28px;
+  padding: 28px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  margin-bottom: 32px;
 }
 
-.trackHeader {
+.badgeRow {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
+  gap: 8px;
   margin-bottom: 12px;
 }
 
-.titleArea {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.trackTitle {
-  font-size: 22px;
-  font-weight: 800;
-  color: #0f172a;
-}
-
-.specTag {
-  font-size: 11.5px;
-  font-weight: 500;
-  color: #475569;
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  padding: 3px 8px;
-  border-radius: 6px;
-}
-
-.trackCodeBox {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 4px;
-}
-
-.trackCodeLabel {
-  font-size: 10px;
-  font-weight: 700;
-  color: #64748b;
-  letter-spacing: 0.06em;
-}
-
-.trackCodeBadge {
-  font-family: var(--font-geist-mono, monospace);
+.deptBadge {
   font-size: 12px;
   font-weight: 600;
-  color: #0f172a;
-  background-color: #f1f5f9;
-  border: 1px solid #cbd5e1;
+  background-color: #eff6ff;
+  color: #2563eb;
   padding: 3px 8px;
   border-radius: 6px;
 }
 
-.trackDescription {
-  font-size: 14px;
+.codeBadge {
+  font-size: 12px;
+  font-family: monospace;
+  background-color: #f1f5f9;
   color: #475569;
-  line-height: 1.6;
-  margin-bottom: 24px;
-  max-width: 660px;
+  padding: 3px 8px;
+  border-radius: 6px;
 }
 
-.metaFourCol {
+.title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.metaRow {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 16px;
+  padding-top: 16px;
   border-top: 1px solid #f1f5f9;
-  padding-top: 18px;
-}
-
-.metaItem {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
 }
 
 .metaLabel {
+  display: block;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 2px;
 }
 
 .metaValue {
-  font-size: 13.5px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: #0f172a;
 }
 
+/* Students Section */
 .studentsSection {
   margin-top: 24px;
 }
 
-.sectionHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
 .sectionTitle {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   color: #0f172a;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  margin-bottom: 16px;
 }
 
-.countBadge {
-  font-size: 12px;
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  color: #334155;
-  padding: 1px 7px;
-  border-radius: 9999px;
-  font-weight: 600;
-}
-
-.trackFilterBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
-}
-
-.filterMuted {
-  color: #64748b;
-}
-
-.trackBadgeText {
-  color: #2563eb;
-  background-color: #eff6ff;
-  border: 1px solid #bfdbfe;
-  padding: 2.5px 8px;
-  border-radius: 6px;
-  font-weight: 600;
-  font-size: 11.5px;
-}
-
-.grid2x2 {
+.studentsGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
 }
 
-.subFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 4px 0;
-  font-size: 12px;
+.noStudents {
   color: #64748b;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.footerLeft {
-  font-weight: 500;
-}
-
-.footerRight {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.pathBadge {
-  font-family: var(--font-geist-mono, monospace);
-  font-size: 11.5px;
-  background-color: #f1f5f9;
-  border: 1px solid #e2e8f0;
-  padding: 2px 7px;
-  border-radius: 4px;
-}
-
-.statusDot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #10b981;
-}
-
-@media (max-width: 768px) {
-  .metaFourCol {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .grid2x2 {
-    grid-template-columns: 1fr;
-  }
-  .trackCard {
-    padding: 24px 20px;
-  }
+  font-size: 14px;
+  background-color: #ffffff;
+  padding: 24px;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+  text-align: center;
 }

@@ -2,11 +2,13 @@ import React from "react";
 import Link from "next/link";
 import styles from "./Breadcrumbs.module.css";
 
+// Interface for a single breadcrumb item
 export interface Crumb {
   label: string;
   href?: string;
 }
 
+// Props for the Breadcrumbs component
 interface BreadcrumbsProps {
   items: Crumb[];
   backLink?: {
@@ -19,6 +21,11 @@ interface BreadcrumbsProps {
   };
 }
 
+/**
+ * Breadcrumbs Component
+ * Renders hierarchical navigation path (e.g. Home / Departments / Computer Science)
+ * and optional back link.
+ */
 export default function Breadcrumbs({
   items,
   backLink,
@@ -26,6 +33,7 @@ export default function Breadcrumbs({
 }: BreadcrumbsProps) {
   return (
     <div className={styles.wrapper}>
+      {/* Breadcrumb List */}
       <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
         <ol className={styles.list}>
           {items.map((item, index) => {
@@ -48,6 +56,7 @@ export default function Breadcrumbs({
         </ol>
       </nav>
 
+      {/* Quick Action Buttons (Back Link & Next Action) */}
       {(backLink || rightAction) && (
         <div className={styles.actionsRow}>
           {backLink && (

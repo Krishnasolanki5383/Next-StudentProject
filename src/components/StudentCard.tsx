@@ -3,32 +3,33 @@ import Link from "next/link";
 import { Student } from "@/data/directoryData";
 import styles from "./StudentCard.module.css";
 
+// Props that this card accepts
 interface StudentCardProps {
   student: Student;
   subFocus?: string;
   showSpecializationOnly?: boolean;
 }
 
+/**
+ * StudentCard Component
+ * Displays a summary card for a single student.
+ * Clicking "View profile" navigates to /students/[slug].
+ */
 export default function StudentCard({
   student,
   subFocus,
   showSpecializationOnly = false,
 }: StudentCardProps) {
-  const getDeptBadgeClass = (dept: string) => {
-    switch (dept) {
-      case "Computer Science":
-        return styles.deptBadgeCS;
-      case "Design":
-        return styles.deptBadgeDesign;
-      case "Business":
-        return styles.deptBadgeBusiness;
-      default:
-        return styles.deptBadgeCS;
-    }
+  // Helper to choose badge color based on department
+  const getBadgeClass = (dept: string) => {
+    if (dept === "Design") return styles.deptBadgeDesign;
+    if (dept === "Business") return styles.deptBadgeBusiness;
+    return styles.deptBadgeCS;
   };
 
   return (
     <div className={styles.card}>
+      {/* Card Header: Avatar & Student ID */}
       <div className={styles.header}>
         <div
           className={styles.avatar}
@@ -39,13 +40,15 @@ export default function StudentCard({
         >
           {student.initials}
         </div>
-        <div className={styles.idBadge}>
+        <span className={styles.idBadge}>
           {showSpecializationOnly ? `Year ${student.studyYear.charAt(0)}` : student.id}
-        </div>
+        </span>
       </div>
 
+      {/* Card Body: Student Name & Department/Year */}
       <div className={styles.body}>
         <h3 className={styles.name}>{student.name}</h3>
+
         {showSpecializationOnly && (
           <div className={styles.subId}>{student.id}</div>
         )}
@@ -53,11 +56,7 @@ export default function StudentCard({
         <div className={styles.metaRow}>
           {!showSpecializationOnly ? (
             <>
-              <span
-                className={`${styles.deptBadge} ${getDeptBadgeClass(
-                  student.department
-                )}`}
-              >
+              <span className={`${styles.deptBadge} ${getBadgeClass(student.department)}`}>
                 {student.department}
               </span>
               <span className={styles.yearText}>{student.studyYear}</span>
@@ -70,27 +69,14 @@ export default function StudentCard({
         </div>
       </div>
 
+      {/* Card Footer: Profile Link */}
       <div className={styles.footer}>
         <Link
           href={`/students/${student.slug}`}
           className={styles.profileLink}
           aria-label={`View profile of ${student.name}`}
         >
-          <span>View profile</span>
-          <svg
-            className={styles.arrowIcon}
-            width="15"
-            height="15"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M5 12h14" />
-            <path d="m12 5 7 7-7 7" />
-          </svg>
+          <span>View profile &rarr;</span>
         </Link>
       </div>
     </div>

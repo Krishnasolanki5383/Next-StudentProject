@@ -1,33 +1,47 @@
+// ============================================================================
+// STUDENT DIRECTORY - MOCK DATABASE & HELPER FUNCTIONS
+// ============================================================================
+// This file stores all sample data for students and departments.
+// In a real application, this data would come from a database (like MongoDB or PostgreSQL).
+// Beginners can easily add, edit, or remove students and departments here!
+
+// ----------------------------------------------------------------------------
+// TypeScript Interfaces (Data Types)
+// ----------------------------------------------------------------------------
+
+// Represents a single subject/course taken by a student
 export interface Subject {
-  code: string;
-  name: string;
-  credits: string;
+  code: string;    // e.g. "CS-101"
+  name: string;    // e.g. "Web Development"
+  credits: string; // e.g. "4.0 Credits"
 }
 
+// Represents a student profile
 export interface Student {
-  id: string; // e.g. "STU-1042"
-  slug: string; // e.g. "aarav-mehta"
-  name: string;
-  initials: string;
-  avatarBg: string;
-  avatarColor: string;
-  department: string; // "Computer Science" | "Design" | "Business"
-  departmentSlug: string; // "computer-science" | "design" | "business"
-  studyYear: string; // "3rd Year"
-  studyYearFull: string; // "3rd Year (Junior)"
-  standing: string; // "3rd Year Undergraduate"
-  enrolled: string; // "Fall 2022"
-  email: string;
-  systemRecordId: string; // "0948-CS-AM"
-  specialization: string; // "Web Development"
-  specializationSlug: string; // "web-development"
-  trackFocus?: string; // "Full-Stack Architecture"
+  id: string;                 // Student ID (e.g. "STU-1042")
+  slug: string;               // URL-friendly name (e.g. "aarav-mehta")
+  name: string;               // Full name
+  initials: string;           // 2-letter initials for avatar
+  avatarBg: string;           // Avatar background color
+  avatarColor: string;        // Avatar text color
+  department: string;         // Department name ("Computer Science", "Design", "Business")
+  departmentSlug: string;     // URL slug for department ("computer-science")
+  studyYear: string;          // Short year ("1st Year", "2nd Year", "3rd Year", "4th Year")
+  studyYearFull: string;      // Full standing description
+  standing: string;           // Academic standing
+  enrolled: string;           // Enrollment semester (e.g. "Fall 2022")
+  email: string;              // Contact email
+  systemRecordId: string;     // Official record ID
+  specialization: string;     // Focused field of study
+  specializationSlug: string; // URL slug for specialization
+  trackFocus?: string;        // Specific track or elective focus
   status: "Active Student" | "On Leave" | "Alumni";
-  lastValidated: string; // "Oct 24, 2024"
-  about: string;
-  subjects: Subject[];
+  lastValidated: string;      // Verification date
+  about: string;              // Short biography
+  subjects: Subject[];        // Enrolled courses
 }
 
+// Represents an academic specialization within a department
 export interface Specialization {
   name: string;
   slug: string;
@@ -39,6 +53,7 @@ export interface Specialization {
   curriculumCycle: string;
 }
 
+// Represents an academic department
 export interface Department {
   name: string;
   slug: string;
@@ -49,6 +64,9 @@ export interface Department {
   specializations: Specialization[];
 }
 
+// ----------------------------------------------------------------------------
+// Students List (8 Sample Students)
+// ----------------------------------------------------------------------------
 export const STUDENTS_DATA: Student[] = [
   {
     id: "STU-1042",
@@ -70,8 +88,7 @@ export const STUDENTS_DATA: Student[] = [
     trackFocus: "Full-Stack Architecture",
     status: "Active Student",
     lastValidated: "Oct 24, 2024",
-    about:
-      "Aarav is an undergraduate researcher focusing on distributed systems and cloud architecture. When not coding in Rust or Go, he mentors first-year engineering students in algorithm fundamentals.",
+    about: "Aarav is an undergraduate researcher focusing on distributed systems and cloud architecture. He mentors first-year engineering students in algorithm fundamentals.",
     subjects: [
       { code: "CS-301", name: "Distributed Systems & Microservices", credits: "4.0 Credits" },
       { code: "CS-340", name: "Web Application Architecture", credits: "4.0 Credits" },
@@ -98,8 +115,7 @@ export const STUDENTS_DATA: Student[] = [
     trackFocus: "Spatial Interface Systems",
     status: "Active Student",
     lastValidated: "Oct 24, 2024",
-    about:
-      "Elena explores the intersection of kinetic typography, accessibility systems, and tactile digital interfaces. She is currently researching multimodal user experiences in AR environments.",
+    about: "Elena explores typography, accessibility systems, and tactile digital interfaces. She is currently researching multimodal user experiences in AR environments.",
     subjects: [
       { code: "DS-210", name: "Visual Design Systems", credits: "4.0 Credits" },
       { code: "DS-230", name: "Interaction Principles & Micro-animations", credits: "3.5 Credits" },
@@ -126,12 +142,11 @@ export const STUDENTS_DATA: Student[] = [
     trackFocus: "Quantitative Venture Modeling",
     status: "Active Student",
     lastValidated: "Oct 24, 2024",
-    about:
-      "Marcus analyzes quantitative market trends, fintech product operations, and sustainable venture funding. He serves as the president of the Campus Student Investment Committee.",
+    about: "Marcus analyzes quantitative market trends, fintech operations, and venture funding. He serves as president of the Student Investment Committee.",
     subjects: [
       { code: "BA-410", name: "Strategic Financial Modeling", credits: "4.0 Credits" },
       { code: "BA-440", name: "Global Venture Capital & Operations", credits: "3.5 Credits" },
-      { code: "BA-390", name: "Corporate Governance & Regulatory Ethics", credits: "3.0 Credits" }
+      { code: "BA-390", name: "Corporate Governance & Ethics", credits: "3.0 Credits" }
     ]
   },
   {
@@ -154,8 +169,7 @@ export const STUDENTS_DATA: Student[] = [
     trackFocus: "Reactive UI Design",
     status: "Active Student",
     lastValidated: "Oct 24, 2024",
-    about:
-      "Priya is passionate about modern reactive web components, accessibility-first design, and web assembly. She regularly contributes to open-source developer tooling and browser polyfills.",
+    about: "Priya is passionate about modern reactive web components, accessibility-first design, and open-source tooling.",
     subjects: [
       { code: "CS-110", name: "Introduction to Computer Systems", credits: "4.0 Credits" },
       { code: "CS-140", name: "Web Foundations & Declarative UI", credits: "4.0 Credits" },
@@ -182,8 +196,7 @@ export const STUDENTS_DATA: Student[] = [
     trackFocus: "Hardware-Software Ergonomics",
     status: "Active Student",
     lastValidated: "Oct 24, 2024",
-    about:
-      "Lucas designs hardware-software ergonomics, tangible interfaces, and rapid interactive prototypes. His works have been exhibited in the annual Campus Design Showcase and regional tech expos.",
+    about: "Lucas designs hardware-software ergonomics, tangible interfaces, and rapid interactive prototypes displayed in design showcases.",
     subjects: [
       { code: "DS-320", name: "Advanced Product Ergonomics", credits: "4.0 Credits" },
       { code: "DS-350", name: "Tangible Computing Interfaces", credits: "4.0 Credits" },
@@ -210,8 +223,7 @@ export const STUDENTS_DATA: Student[] = [
     trackFocus: "Sustainable Venture Acceleration",
     status: "Active Student",
     lastValidated: "Oct 24, 2024",
-    about:
-      "Maya focuses on circular economy models, product-led growth strategies, and early-stage startup viability. She co-leads the campus Social Innovation Lab and sustainable enterprise workshop.",
+    about: "Maya focuses on circular economy models, startup growth strategies, and social innovation labs.",
     subjects: [
       { code: "BA-220", name: "Managerial Economics & Strategy", credits: "4.0 Credits" },
       { code: "BA-250", name: "Innovation & Entrepreneurship", credits: "3.5 Credits" },
@@ -238,8 +250,7 @@ export const STUDENTS_DATA: Student[] = [
     trackFocus: "Distributed Web Systems",
     status: "Active Student",
     lastValidated: "Oct 24, 2024",
-    about:
-      "Tariq works on high-throughput backend services, consensus algorithms, and decentralized architectures. He has interned at leading cloud infrastructure providers and designed distributed telemetry pipelines.",
+    about: "Tariq works on high-throughput backend services, consensus algorithms, and scalable cloud architectures.",
     subjects: [
       { code: "CS-410", name: "Distributed Consensus Protocols", credits: "4.0 Credits" },
       { code: "CS-450", name: "Scalable Cloud Architecture", credits: "4.0 Credits" },
@@ -266,8 +277,7 @@ export const STUDENTS_DATA: Student[] = [
     trackFocus: "Progressive Web Apps",
     status: "Active Student",
     lastValidated: "Oct 24, 2024",
-    about:
-      "Sophia focuses on offline-first architectures, service workers, and client-side performance engineering. She is an active organizer for Women in Tech campus workshops and student hackathons.",
+    about: "Sophia focuses on offline-first architectures, service workers, and client-side performance engineering.",
     subjects: [
       { code: "CS-220", name: "Data Structures & Algorithms", credits: "4.0 Credits" },
       { code: "CS-260", name: "Progressive Web Applications", credits: "3.5 Credits" },
@@ -276,6 +286,9 @@ export const STUDENTS_DATA: Student[] = [
   }
 ];
 
+// ----------------------------------------------------------------------------
+// Departments List (3 Academic Departments)
+// ----------------------------------------------------------------------------
 export const DEPARTMENTS_DATA: Department[] = [
   {
     name: "Computer Science",
@@ -299,7 +312,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Artificial Intelligence & Machine Learning",
         slug: "ai-machine-learning",
         trackCode: "CS-SPEC-01",
-        description: "Deep neural representations, natural language understanding, reinforcement learning, and autonomous agent systems.",
+        description: "Deep neural representations, natural language understanding, and autonomous agent systems.",
         academicLead: "Dr. Aris Thorne",
         coreLab: "Lovelace Computing Center 201",
         enrolledCount: 110,
@@ -309,7 +322,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Systems & Cloud Infrastructure",
         slug: "systems-cloud",
         trackCode: "CS-SPEC-02",
-        description: "Operating system primitives, virtualized container orchestration, low-latency storage, and scalable distributed networks.",
+        description: "Operating system primitives, container orchestration, and scalable distributed networks.",
         academicLead: "Prof. David Kroll",
         coreLab: "Hopper Systems Lab 110",
         enrolledCount: 95,
@@ -319,7 +332,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Cybersecurity & Cryptography",
         slug: "cybersecurity-cryptography",
         trackCode: "CS-SPEC-03",
-        description: "Zero-knowledge verification, post-quantum cipher suites, secure enclaves, and kernel-level exploit prevention.",
+        description: "Zero-knowledge verification, secure enclaves, and kernel-level exploit prevention.",
         academicLead: "Dr. Nina Chen",
         coreLab: "Shannon Cryptography Annex 305",
         enrolledCount: 75,
@@ -339,7 +352,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Interaction & UI Design",
         slug: "interaction-ui-design",
         trackCode: "DS-SPEC-01",
-        description: "Motion mechanics, kinetic typography, user affordance modeling, and accessible design system architecture.",
+        description: "Motion mechanics, kinetic typography, user affordance modeling, and accessible design systems.",
         academicLead: "Prof. Margot Adler",
         coreLab: "Bauhaus Studio 102",
         enrolledCount: 70,
@@ -349,7 +362,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Product & Experience Prototyping",
         slug: "product-prototyping",
         trackCode: "DS-SPEC-02",
-        description: "Physical computing, tangible interface fabrication, rapid 3D user trials, and mixed-reality spatial testing.",
+        description: "Physical computing, tangible interface fabrication, and rapid 3D user trials.",
         academicLead: "Dr. Simon Laurent",
         coreLab: "Maker Fabrication Hall 204",
         enrolledCount: 65,
@@ -359,7 +372,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Visual Communication & Brand Strategy",
         slug: "visual-communication",
         trackCode: "DS-SPEC-03",
-        description: "Editorial systems, narrative branding, information visualization, and multi-channel publication aesthetics.",
+        description: "Editorial systems, narrative branding, information visualization, and publication aesthetics.",
         academicLead: "Prof. Rachel Sterling",
         coreLab: "Graphic Media Center 310",
         enrolledCount: 50,
@@ -379,7 +392,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Financial Technology & Analytics",
         slug: "fintech-analytics",
         trackCode: "BA-SPEC-01",
-        description: "Quantitative portfolio modeling, algorithmic trading systems, decentralized ledger economics, and predictive financial analytics.",
+        description: "Quantitative portfolio modeling, algorithmic trading systems, and predictive financial analytics.",
         academicLead: "Dr. Julian Hayes",
         coreLab: "Bloomberg Finance Suite 501",
         enrolledCount: 90,
@@ -389,7 +402,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Strategic Management & Entrepreneurship",
         slug: "strategic-management",
         trackCode: "BA-SPEC-02",
-        description: "Venture incubation, commercial scaling frameworks, product-led expansion, and circular economic model analysis.",
+        description: "Venture incubation, commercial scaling frameworks, and circular economic model analysis.",
         academicLead: "Prof. Claire Donovan",
         coreLab: "Venture Incubator Hub 202",
         enrolledCount: 85,
@@ -399,7 +412,7 @@ export const DEPARTMENTS_DATA: Department[] = [
         name: "Global Supply Chain & Operations",
         slug: "supply-chain-operations",
         trackCode: "BA-SPEC-03",
-        description: "International freight logistics, dynamic procurement optimization, multi-node resiliency, and ethical vendor governance.",
+        description: "International freight logistics, dynamic procurement optimization, and ethical vendor governance.",
         academicLead: "Dr. Robert Zhang",
         coreLab: "Global Logistics Lab 304",
         enrolledCount: 65,
@@ -409,39 +422,62 @@ export const DEPARTMENTS_DATA: Department[] = [
   }
 ];
 
+// ----------------------------------------------------------------------------
+// Helper Functions (Easy data lookups for pages and components)
+// ----------------------------------------------------------------------------
+
+/**
+ * Returns all students in the directory.
+ */
 export function getAllStudents(): Student[] {
   return STUDENTS_DATA;
 }
 
+/**
+ * Finds a student by either their ID (e.g. "STU-1042") or their slug (e.g. "aarav-mehta").
+ * Returns undefined if not found.
+ */
 export function getStudentByIdOrSlug(idOrSlug: string): Student | undefined {
-  const normalized = decodeURIComponent(idOrSlug).toLowerCase();
+  const query = decodeURIComponent(idOrSlug).toLowerCase();
   return STUDENTS_DATA.find(
-    (s) =>
-      s.id.toLowerCase() === normalized ||
-      s.slug.toLowerCase() === normalized ||
-      s.name.toLowerCase().replace(/\s+/g, "-") === normalized
+    (student) =>
+      student.id.toLowerCase() === query ||
+      student.slug.toLowerCase() === query ||
+      student.name.toLowerCase().replace(/\s+/g, "-") === query
   );
 }
 
+/**
+ * Finds a department by its URL slug (e.g. "computer-science").
+ * Returns undefined if not found.
+ */
 export function getDepartmentBySlug(slug: string): Department | undefined {
-  const normalized = decodeURIComponent(slug).toLowerCase();
-  return DEPARTMENTS_DATA.find((d) => d.slug.toLowerCase() === normalized);
+  const query = decodeURIComponent(slug).toLowerCase();
+  return DEPARTMENTS_DATA.find((dept) => dept.slug.toLowerCase() === query);
 }
 
+/**
+ * Finds a specific specialization inside a department.
+ */
 export function getSpecialization(
   deptSlug: string,
   specSlug: string
 ): { department: Department; specialization: Specialization } | undefined {
-  const dept = getDepartmentBySlug(deptSlug);
-  if (!dept) return undefined;
-  const spec = dept.specializations.find(
-    (s) => s.slug.toLowerCase() === decodeURIComponent(specSlug).toLowerCase()
+  const department = getDepartmentBySlug(deptSlug);
+  if (!department) return undefined;
+
+  const specialization = department.specializations.find(
+    (spec) => spec.slug.toLowerCase() === decodeURIComponent(specSlug).toLowerCase()
   );
-  if (!spec) return undefined;
-  return { department: dept, specialization: spec };
+  if (!specialization) return undefined;
+
+  return { department, specialization };
 }
 
+/**
+ * Returns all students enrolled in a particular specialization.
+ */
 export function getStudentsBySpecialization(specSlug: string): Student[] {
-  const normalized = decodeURIComponent(specSlug).toLowerCase();
-  return STUDENTS_DATA.filter((s) => s.specializationSlug.toLowerCase() === normalized);
+  const query = decodeURIComponent(specSlug).toLowerCase();
+  return STUDENTS_DATA.filter((s) => s.specializationSlug.toLowerCase() === query);
 }

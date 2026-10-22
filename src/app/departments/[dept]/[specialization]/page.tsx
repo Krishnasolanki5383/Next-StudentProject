@@ -9,10 +9,15 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import StudentCard from "@/components/StudentCard";
 import styles from "./SpecializationPage.module.css";
 
+// Dynamic parameters for nested route: /departments/[dept]/[specialization]
 interface PageProps {
   params: Promise<{ dept: string; specialization: string }>;
 }
 
+/**
+ * generateStaticParams
+ * Informs Next.js of all nested specialization URLs to pre-render.
+ */
 export async function generateStaticParams() {
   const params: { dept: string; specialization: string }[] = [];
   for (const dept of DEPARTMENTS_DATA) {
@@ -26,21 +31,32 @@ export async function generateStaticParams() {
   return params;
 }
 
-export default async function NestedSpecializationPage({ params }: PageProps) {
+/**
+ * SpecializationPage Component
+ * Nested Dynamic Route: /departments/[dept]/[specialization]
+ * Displays details for an individual track/specialization and its enrolled students.
+ */
+export default async function SpecializationPage({ params }: PageProps) {
+  // 1. Get dept and specialization from URL params
   const { dept: deptSlug, specialization: specSlug } = await params;
+
+  // 2. Fetch the specialization data
   const specData = getSpecialization(deptSlug, specSlug);
 
+  // 3. If not found, show 404
   if (!specData) {
     notFound();
   }
 
   const { department, specialization } = specData;
+
+  // 4. Find students enrolled in this specialization
   const students = getStudentsBySpecialization(specialization.slug);
 
   return (
     <div className={styles.pageContainer}>
       <div className={styles.inner}>
-        {/* Breadcrumbs and navigation */}
+        {/* Navigation Breadcrumbs */}
         <Breadcrumbs
           items={[
             { label: "Departments", href: "/departments" },
@@ -48,7 +64,7 @@ export default async function NestedSpecializationPage({ params }: PageProps) {
             { label: specialization.name },
           ]}
           backLink={{
-            label: `Return to ${department.name} Department`,
+            label: `Back to ${department.name}`,
             href: `/departments/${department.slug}`,
           }}
           rightAction={{
@@ -57,96 +73,57 @@ export default async function NestedSpecializationPage({ params }: PageProps) {
           }}
         />
 
-        {/* Track Overview Card */}
-        <div className={styles.trackCard}>
-          <div className={styles.trackHeader}>
-            <div className={styles.titleArea}>
-              <h1 className={styles.trackTitle}>{specialization.name}</h1>
-              <span className={styles.specTag}>
-                Specialization under {department.name}
-              </span>
-            </div>
-
-            <div className={styles.trackCodeBox}>
-              <span className={styles.trackCodeLabel}>DEPARTMENT TRACK</span>
-              <span className={styles.trackCodeBadge}>
-                {specialization.trackCode}
-              </span>
+        {/* Specialization Overview Card */}
+        <div className={styles.specCard}>
+          <div className={styles.header}>
+            <div>
+              <div className={styles.badgeRow}>
+                <span className={styles.deptBadge}>{department.name}</span>
+                <span className={styles.codeBadge}>{specialization.trackCode}</span>
+              </div>
+              <h1 className={styles.title}>{specialization.name}</h1>
+              <p className={styles.description}>{specialization.description}</p>
             </div>
           </div>
 
-          <p className={styles.trackDescription}>
-            {specialization.description}
-          </p>
-
-          <div className={styles.metaFourCol}>
-            <div className={styles.metaItem}>
+          <div className={styles.metaRow}>
+            <div>
               <span className={styles.metaLabel}>Academic Lead</span>
-              <span className={styles.metaValue}>
-                {specialization.academicLead}
-              </span>
+              <span className={styles.metaValue}>{specialization.academicLead}</span>
             </div>
-
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Primary Core Lab</span>
+            <div>
+              <span className={styles.metaLabel}>Core Facility</span>
               <span className={styles.metaValue}>{specialization.coreLab}</span>
             </div>
-
-            <div className={styles.metaItem}>
-              <span className={styles.metaLabel}>Total Enrollment</span>
-              <span className={styles.metaValue}>
-                {specialization.enrolledCount} Active Enrollees
-              </span>
-            </div>
-
-            <div className={styles.metaItem}>
+            <div>
               <span className={styles.metaLabel}>Curriculum Cycle</span>
-              <span className={styles.metaValue}>
-                {specialization.curriculumCycle}
-              </span>
+              <span className={styles.metaValue}>{specialization.curriculumCycle}</span>
             </div>
           </div>
         </div>
 
-        {/* Students in Specialization Section */}
+        {/* Enrolled Students in this Specialization */}
         <div className={styles.studentsSection}>
-          <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>
-              Students in this Specialization
-              <span className={styles.countBadge}>{students.length}</span>
-            </h2>
+          <h2 className={styles.sectionTitle}>
+            Enrolled Students ({students.length})
+          </h2>
 
-            <div className={styles.trackFilterBadge}>
-              <span className={styles.filterMuted}>Filtered by Track:</span>
-              <span className={styles.trackBadgeText}>
-                {specialization.name}
-              </span>
+          {students.length > 0 ? (
+            <div className={styles.studentsGrid}>
+              {students.map((student) => (
+                <StudentCard
+                  key={student.id}
+                  student={student}
+                  showSpecializationOnly={true}
+                  subFocus={student.trackFocus}
+                />
+              ))}
             </div>
-          </div>
-
-          <div className={styles.grid2x2}>
-            {students.map((student) => (
-              <StudentCard
-                key={student.id}
-                student={student}
-                showSpecializationOnly={true}
-                subFocus={student.trackFocus}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* System Sub-Footer */}
-        <div className={styles.subFooter}>
-          <span className={styles.footerLeft}>
-            Campus Directory &copy; Academic Informatics Core
-          </span>
-          <div className={styles.footerRight}>
-            <span className={styles.pathBadge}>
-              Path: /departments/{department.slug}/{specialization.slug}
-            </span>
-            <span className={styles.statusDot} />
-          </div>
+          ) : (
+            <p className={styles.noStudents}>
+              No student profiles currently enrolled in this track.
+            </p>
+          )}
         </div>
       </div>
     </div>
